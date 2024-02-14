@@ -15,19 +15,17 @@
 # not raising an exception). `hasattr` is also safe.
 
 import logging
-import os
 
-import yaml
 
 try:
     from collections import OrderedDict
 except ImportError:
-    from ordereddict import OrderedDict # type: ignore
+    from ordereddict import OrderedDict  # type: ignore
 
 
 dgl_mode = True
 
-bind_nonsecure = True # Set to false to only use SSL
+bind_nonsecure = True  # Set to false to only use SSL
 bind_address = ""
 bind_port = 8080
 # Or listen on multiple address/port pairs (overriding the above) with:
@@ -38,9 +36,9 @@ bind_port = 8080
 # )
 
 logging_config = {
-#    "filename": "webtiles.log",
+    #    "filename": "webtiles.log",
     "level": logging.INFO,
-    "format": "%(asctime)s %(levelname)s: %(message)s"
+    "format": "%(asctime)s %(levelname)s: %(message)s",
 }
 
 password_db = "/data/webserver/passwd.db3"
@@ -52,7 +50,7 @@ static_path = "./webserver/static"
 template_path = "./webserver/templates/"
 
 # Path for server-side unix sockets (to be used to communicate with crawl)
-server_socket_path = None # Uses global temp dir
+server_socket_path = None  # Uses global temp dir
 
 # Server name, so far only used in the ttyrec metadata
 server_id = ""
@@ -73,26 +71,31 @@ use_game_yaml = True
 #    by default loads games as defined in `games.d/*.yaml`).
 #
 # All options in this config are documented in games.d/base.yaml.
-games = OrderedDict([
-    ("dcss-web-trunk", dict(
-        name = "Play trunk",
-        crawl_binary = "/app/bin/crawl",
-        rcfile_path = "/data/rcs/",
-        macro_path = "/data/rcs/",
-        morgue_path = "/data/rcs/%n",
-        inprogress_path = "/data/rcs/running",
-        ttyrec_path = "/data/rcs/ttyrecs/%n",
-        socket_path = "/data/rcs",
-        client_path = "/app/webserver/game_data/",
-        # dir_path = ".",
-        # cwd = ".",
-        morgue_url = None,
-        show_save_info = True,
-        milestone_path = "/data/rcs/milestones",
-        send_json_options = True,
-        # env = {"LANG": "en_US.UTF8"},
-        )),
-])
+games = OrderedDict(
+    [
+        (
+            "dcss-web-trunk",
+            dict(
+                name="Play trunk",
+                crawl_binary="/app/bin/crawl",
+                rcfile_path="/data/rcs/",
+                macro_path="/data/rcs/",
+                morgue_path="/data/rcs/%n",
+                inprogress_path="/data/rcs/running",
+                ttyrec_path="/data/rcs/ttyrecs/%n",
+                socket_path="/data/rcs",
+                client_path="/app/webserver/game_data/",
+                # dir_path = ".",
+                # cwd = ".",
+                morgue_url=None,
+                show_save_info=True,
+                milestone_path="/data/rcs/milestones",
+                send_json_options=True,
+                # env = {"LANG": "en_US.UTF8"},
+            ),
+        ),
+    ]
+)
 
 
 dgl_status_file = "/data/rcs/status"
@@ -113,11 +116,11 @@ max_connections = 100
 # at the moment.
 init_player_program = "./util/webtiles-init-player.sh"
 
-ssl_options = None # No SSL
-#ssl_options = {
+ssl_options = None  # No SSL
+# ssl_options = {
 #    "certfile": "./webserver/localhost.crt",
 #    "keyfile": "./webserver/localhost.key"
-#}
+# }
 ssl_address = ""
 ssl_port = 8081
 # Or listen on multiple address/port pairs (overriding the above) with:
@@ -144,12 +147,12 @@ http_connection_timeout = None
 # directly exposed to users.
 http_xheaders = None
 
-kill_timeout = 10 # Seconds until crawl is killed after HUP is sent
+kill_timeout = 10  # Seconds until crawl is killed after HUP is sent
 
 nick_regex = r"^[a-zA-Z0-9]{3,20}$"
 max_passwd_length = 20
 
-allow_password_reset = False # Set to true to allow users to request a password reset email. Some settings must be properly configured for this to work
+allow_password_reset = False  # Set to true to allow users to request a password reset email. Some settings must be properly configured for this to work
 
 # Set to the primary URL where a player would reach the main lobby
 # For example: "http://crawl.akrasiac.org/"
@@ -167,10 +170,10 @@ lobby_url = None
 smtp_host = "localhost"
 smtp_port = 25
 smtp_use_ssl = False
-smtp_user = "" # set to None for no auth
+smtp_user = ""  # set to None for no auth
 smtp_password = ""
-smtp_from_addr = "noreply@crawl.example.org" # The address from which automated
-                                             # emails will be sent
+smtp_from_addr = "noreply@crawl.example.org"  # The address from which automated
+# emails will be sent
 
 # crypt() algorithm, e.g. "1" for MD5 or "6" for SHA-512; see crypt(3). If
 # false, use traditional DES (but then only the first eight characters of the
@@ -184,17 +187,17 @@ crypt_algorithm = "broken"
 # setting is ignored and the salt is two characters.
 crypt_salt_length = 16
 
-login_token_lifetime = 7 # Days
+login_token_lifetime = 7  # Days
 
 uid = None  # If this is not None, the server will setuid to that (numeric) id
 gid = None  # after binding its sockets.
 
-umask = None # e.g. 0077
+umask = None  # e.g. 0077
 
 chroot = None
 
 pidfile = None
-daemon = False # If true, the server will detach from the session after startup
+daemon = False  # If true, the server will detach from the session after startup
 
 # Set to a URL with %s where lowercased player name should go in order to
 # hyperlink WebTiles spectator names to their player pages.

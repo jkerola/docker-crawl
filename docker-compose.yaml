@@ -2,10 +2,15 @@ version: "3"
 
 services:
   crawl:
-    image: frozenfoxx/crawl:latest
-    container_name: "crawl_webtiles"
+    image: dcss
+    build:
+      context: .
+      dockerfile: Dockerfile.webtiles
     restart: always
     ports:
-      - 80:8080
+      - 8080:8080
     volumes:
-      - /data/crawl:/data
+      - crawl:/data
+
+volumes:
+  crawl:

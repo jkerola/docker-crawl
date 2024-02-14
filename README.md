@@ -1,27 +1,15 @@
 # docker-crawl
 
-[![Build Status](https://cloud.drone.io/api/badges/frozenfoxx/docker-crawl/status.svg?ref=refs/heads/main)](https://cloud.drone.io/frozenfoxx/docker-crawl)
-
 Docker container for Dungeon Crawl Stone Soup (DCSS).
 
-Docker Hub: [https://hub.docker.com/r/frozenfoxx/crawl](https://hub.docker.com/r/frozenfoxx/crawl)
+Forked from [frozenfoxx/docker-crawl.](https://github.com/frozenfoxx/docker-crawl) Up to date as of Feb 2024.
 
 ## How to Build
 
 ```
-git clone git@github.com:frozenfoxx/docker-crawl.git
+git clone https://github.com/jkerola/docker-crawl
 cd docker-crawl
-docker build .
-```
-
-To build a Webtiles server build explicitly:
-```
-docker build -f Dockerfile.webtiles .
-```
-
-To build a Tiles server build explicitly:
-```
-docker build -f Dockerfile.tiles .
+docker build -f Dockerfile.webtiles -t dcss .
 ```
 
 # How to Use this Image
@@ -31,7 +19,7 @@ docker build -f Dockerfile.tiles .
 The following will run the latest Webtiles crawl server.
 
 ```
-docker run -d --rm -p 8080:8080 --name=crawl_webtiles frozenfoxx/crawl:latest
+docker run -d --rm -p 8080:8080 --name=crawl_webtiles dcss:latest
 ```
 
 ## Persistent Deployment
@@ -39,11 +27,5 @@ docker run -d --rm -p 8080:8080 --name=crawl_webtiles frozenfoxx/crawl:latest
 All player RCs and webserver database files are located within `/data` within the container. Bind mount a host directory to this location to maintain persistence.
 
 ```
-docker run \
-  -d \
-  --rm \
-  -v /data/:/data \
-  -p 8080:8080 \
-  --name=crawl_webtiles \
-  frozenfoxx/crawl:latest
+docker-compose up -d
 ```

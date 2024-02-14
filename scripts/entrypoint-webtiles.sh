@@ -25,4 +25,4 @@ create_server_dirs()
 create_server_dirs
 
 cd ${APPDIR}
-./webserver/server.py $@
+python3 ./webserver/server.py $@

@@ -9,4 +9,4 @@ DATA_DIR=${DATA_DIR:-"/data"}
 # Logic
 
 cd ${APPDIR}
-./webserver/server.py $@
+python3 ./webserver/server.py $@
